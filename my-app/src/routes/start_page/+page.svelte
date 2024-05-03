@@ -1,0 +1,1 @@
+<button class="h-40 pr-10 pl-10 rounded-lg bg-gray-800 text-white text-8xl"><a href="/select_design">사진촬영</a></button>
