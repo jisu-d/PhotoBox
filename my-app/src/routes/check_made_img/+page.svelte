@@ -9,7 +9,9 @@
     onMount(() => {
         if($user_data.select_imgs_num.length !== 4){
             alert('정상적인 접근이 아닙니다.')
-            goto('/start_page')
+            goto('/start_page', {
+                replaceState: true
+            })
         }
     })
 </script>
