@@ -5,7 +5,7 @@
     function OnClick(){
         if ($user_data.select_imgs_num.length === 4){
             goto('/check_made_img', {
-                replaceState: false
+                replaceState: true
             })
         }
     }

@@ -16,6 +16,8 @@
     onMount(async () => {
         try {
             const response = await fetch('http://localhost:8000/createCollage', {
+            // const response = await fetch('https://pgxx9fwk-8000.asse.devtunnels.ms/createCollage', {
+
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/json'
