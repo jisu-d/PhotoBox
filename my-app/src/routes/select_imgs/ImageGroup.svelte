@@ -7,14 +7,14 @@
   
   $: value = $user_data.capture_imgs;
 
-  console.log(user_data);
   
-
+  
   onMount(() => {
-    if ($user_data.capture_imgs.length === 0) {
-      alert('정상적인 접근이 아닙니다.');
-      goto('/start_page');
-    }
+    console.log(user_data);
+    // if ($user_data.capture_imgs.length === 0) {
+    //   alert('정상적인 접근이 아닙니다.');
+    //   goto('/start_page');
+    // }
   });
   
   function toggleSelection(index: number) {
