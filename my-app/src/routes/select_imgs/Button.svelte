@@ -1,5 +1,3 @@
-// SomeOtherComponent.svelte
-
 <script lang="ts">
     import { goto } from '$app/navigation';
     import { user_data } from '$lib/store';
