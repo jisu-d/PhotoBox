@@ -108,7 +108,7 @@
             user_data.set({ ...$user_data, capture_imgs: capture });
             
             goto('/select_imgs', {
-                replaceState: true
+                replaceState: false
             })
             return;
         }
