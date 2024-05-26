@@ -28,6 +28,7 @@
     import { browser } from "$app/environment";
     import { onDestroy, onMount } from "svelte";
     import { user_data } from '$lib/store';
+    import { goto } from "$app/navigation";
 
     let videoSource: HTMLVideoElement;
     let canvasElement: HTMLCanvasElement;
@@ -105,7 +106,9 @@
     const loop = () => {
         if (capture.length > 5) {
             user_data.set({ ...$user_data, capture_imgs: capture });
-            location.href='/select_imgs'
+            goto('/select_imgs', {
+                replaceState: false
+            })
             return;
         }
         if (!ctx || !videoSource || videoSource.paused || !canvasElement) {
@@ -181,7 +184,7 @@
             {6 - capture.length > 1 ? 6 - capture.length : 'Last'} Chance
         </div>
         <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-white text-4xl font-bold captime" class:capchtimer>{captime - 1}</div>
+            <div class="text-white text-4xl font-bold captime" class:capchtimer>{Math.max(captime - 1, 0)}</div>
         </div>
     {/if}
 </div>

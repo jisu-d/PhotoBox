@@ -5,7 +5,9 @@
     function BtnClick() {
         const value = $user_data.design_num;
 		if (value === '') return;
-		goto('/capture_imgs');
+		goto('/capture_imgs', {
+            replaceState: false
+        });
     }
 </script>
 
