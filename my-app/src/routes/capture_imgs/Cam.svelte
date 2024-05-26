@@ -28,7 +28,6 @@
     import { browser } from "$app/environment";
     import { onDestroy, onMount } from "svelte";
     import { user_data } from '$lib/store';
-    import { goto } from "$app/navigation";
 
     let videoSource: HTMLVideoElement;
     let canvasElement: HTMLCanvasElement;
@@ -106,7 +105,7 @@
     const loop = () => {
         if (capture.length > 5) {
             user_data.set({ ...$user_data, capture_imgs: capture });
-            goto('/select_imgs');
+            location.href='/select_imgs'
             return;
         }
         if (!ctx || !videoSource || videoSource.paused || !canvasElement) {
