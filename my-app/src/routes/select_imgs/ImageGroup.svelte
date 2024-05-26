@@ -2,14 +2,13 @@
   import { goto } from '$app/navigation';
   import { user_data } from '$lib/store';
   import { onDestroy, onMount } from 'svelte';
-  import { get } from 'svelte/store';
   
   let value: string[] = [];
   
   $: value = $user_data.capture_imgs;
 
   onMount(() => {
-    if (get(user_data).capture_imgs.length === 0) {
+    if ($user_data.capture_imgs.length === 0) {
       alert('정상적인 접근이 아닙니다.');
       goto('/start_page');
     }
