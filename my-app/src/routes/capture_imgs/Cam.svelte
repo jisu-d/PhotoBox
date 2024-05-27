@@ -107,9 +107,9 @@
         if (capture.length > 5) {
             user_data.set({ ...$user_data, capture_imgs: capture });
             
-            goto('/select_imgs', {
-                replaceState: true
-            })
+            // goto('/select_imgs', {
+            //     replaceState: true
+            // })
             return;
         }
         if (!ctx || !videoSource || videoSource.paused || !canvasElement) {
