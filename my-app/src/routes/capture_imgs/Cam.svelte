@@ -106,6 +106,7 @@
     const loop = () => {
         if (capture.length > 5) {
             user_data.set({ ...$user_data, capture_imgs: capture });
+            console.log($user_data)
             
             // goto('/select_imgs', {
             //     replaceState: true
