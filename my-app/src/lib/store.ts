@@ -1,6 +1,6 @@
 import { writable, type Writable } from 'svelte/store';
 
-import type {USER_INFO} from '$lib/public/type'
+import type { USER_INFO } from '$lib/public/type'
 
 export const user_data: Writable<USER_INFO> = writable<USER_INFO>({
     design_num: '',

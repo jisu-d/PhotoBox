@@ -36,4 +36,4 @@ def read_root(data: MADE_DATE):
     return {
         "img_name": collageData[0],
         'collage_img': collageData[1]
-    }  
+    }

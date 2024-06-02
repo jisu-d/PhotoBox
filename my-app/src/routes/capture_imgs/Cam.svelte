@@ -7,7 +7,6 @@
         display: none;
     }
 
-
     @media (max-aspect-ratio: 1/1) {
         .dynamic-container {
             width: 95%;
@@ -34,6 +33,8 @@
     let canvasElement: HTMLCanvasElement;
     let stream: MediaStream;
     let reqNum = 0;
+
+    let filedata = ($user_data.design_num).split('-');
 
     // 0 : 평소 상태
     // 1 : 찍기 직전
@@ -106,11 +107,9 @@
     const loop = () => {
         if (capture.length > 5) {
             user_data.set({ ...$user_data, capture_imgs: capture });
-            console.log($user_data)
-            
-            // goto('/select_imgs', {
-            //     replaceState: true
-            // })
+            goto('/select_imgs', {
+                replaceState: true
+            })
             return;
         }
         if (!ctx || !videoSource || videoSource.paused || !canvasElement) {

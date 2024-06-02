@@ -4,3 +4,14 @@
         Take a photo with your friends, apply a cool frame, and print it!
     </p>
 </a>
+
+<script>
+    import { user_data } from '$lib/store'
+    user_data.set({
+        design_num: '',
+        capture_imgs: [],
+        select_imgs_num: [],
+        made_img: '',
+        cropp_size: '',
+    })
+</script>

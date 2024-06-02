@@ -12,34 +12,52 @@ def count_files(directory):
     file_count = len(files)
     return file_count
 
-def add_overlays(background, overlays):
-    for image_data, points in overlays:
+def add_overlays(foreground, backgrounds):
+    foreground_height, foreground_width, _ = foreground.shape
+
+    # 검정색 배경 이미지 생성
+    black_background = np.zeros((foreground_height, foreground_width, 3), dtype=np.uint8)
+
+    for image_data, points in backgrounds:
         overlay_data = base64.b64decode(image_data)
         overlay_image = Image.open(BytesIO(overlay_data))
         overlay_np = cv2.cvtColor(np.array(overlay_image), cv2.COLOR_RGB2BGR)
-        
+            
         h, w = overlay_np.shape[:2]
-        
+            
         # 네 꼭짓점 좌표 계산
         src_points = np.array([[0, 0], [w, 0], [w, h], [0, h]], dtype=np.float32)
         dst_points = np.array(points, dtype=np.float32)
-        
+            
         # 투영 변환 매트릭스 계산
         matrix = cv2.getPerspectiveTransform(src_points, dst_points)
-        
+            
         # 이미지 변환
-        warped_overlay = cv2.warpPerspective(overlay_np, matrix, (background.shape[1], background.shape[0]))
-        
+        warped_overlay = cv2.warpPerspective(overlay_np, matrix, (black_background.shape[1], black_background.shape[0]))
+            
         # 마스크 생성
-        mask = np.zeros_like(background, dtype=np.uint8)
+        mask = np.zeros_like(black_background, dtype=np.uint8)
         cv2.fillConvexPoly(mask, np.int32([dst_points]), (255, 255, 255))
         mask_inv = cv2.bitwise_not(mask)
-        
+            
         # 배경 이미지와 합성
-        background = cv2.bitwise_and(background, mask_inv)
-        background = cv2.bitwise_or(background, warped_overlay)
+        black_background = cv2.bitwise_and(black_background, mask_inv)
+        black_background = cv2.bitwise_or(black_background, warped_overlay)
 
-    return background
+    # 알파 채널 분리
+    foreground_alpha = foreground[:, :, 3]
+    foreground_rgb = foreground[:, :, :3]
+
+    # 알파 채널을 3채널로 확장
+    foreground_alpha_expanded = np.expand_dims(foreground_alpha, axis=2)
+    foreground_alpha_expanded = np.repeat(foreground_alpha_expanded, 3, axis=2)
+
+    # 배경 이미지와 전경 이미지 합치기
+    result = cv2.multiply(black_background.astype(float), (1 - (foreground_alpha_expanded / 255)))
+    result += cv2.multiply(foreground_rgb.astype(float), (foreground_alpha_expanded / 255))
+    result = result.astype(np.uint8)
+
+    return result
 
 def save_image_with_count_and_random_hex(background, directory):
     random_hex = ''.join(random.choice('0123456789ABCDEF') for _ in range(5))
@@ -86,7 +104,7 @@ def creative_collage_images(data):
 
     title_parts = data.title.split('-')
 
-    background = cv2.imread(f'C:/Users/lim16/Desktop/PhotoBox/sever/frame/{title_parts[0]}/{title_parts[1]}.jpg')
+    background = cv2.imread(f'C:/Users/lim16/Desktop/PhotoBox/sever/frame/{title_parts[0]}/{title_parts[1]}.png', cv2.IMREAD_UNCHANGED)
 
     background_with_overlays = add_overlays(background, overlays)
 
