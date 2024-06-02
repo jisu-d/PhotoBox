@@ -76,8 +76,8 @@ def resize_image(background, max_width, max_height):
 
 def read_json():
     # JSON 파일 경로
-    file_path = "C:/Users/lim16/Desktop/PhotoBox/sever/frame_info.json"
-    # file_path = "/home/jisu/project/PhotoBox/sever/frame_info.json"
+    # file_path = "C:/Users/lim16/Desktop/PhotoBox/sever/frame_info.json"
+    file_path = "/home/jisu/project/PhotoBox/sever/frame_info.json"
 
     # JSON 파일 열기
     with open(file_path, "r") as json_file:
@@ -105,15 +105,15 @@ def creative_collage_images(data):
 
     title_parts = data.title.split('-')
 
-    background = cv2.imread(f'C:/Users/lim16/Desktop/PhotoBox/sever/frame/{title_parts[0]}/{title_parts[1]}.png', cv2.IMREAD_UNCHANGED)
-    # background = cv2.imread(f'/home/jisu/project/PhotoBox/sever/frame/{title_parts[0]}/{title_parts[1]}.png', cv2.IMREAD_UNCHANGED)
+    # background = cv2.imread(f'C:/Users/lim16/Desktop/PhotoBox/sever/frame/{title_parts[0]}/{title_parts[1]}.png', cv2.IMREAD_UNCHANGED)
+    background = cv2.imread(f'/home/jisu/project/PhotoBox/sever/frame/{title_parts[0]}/{title_parts[1]}.png', cv2.IMREAD_UNCHANGED)
 
     background_with_overlays = add_overlays(background, overlays)
 
     resized_background = resize_image(background_with_overlays, 800, 900)
 
-    file_path = save_image_with_count_and_random_hex(background_with_overlays, 'C:/Users/lim16/Desktop/PhotoBox/sever/save')
-    # file_path = save_image_with_count_and_random_hex(background_with_overlays, '/home/jisu/project/PhotoBox/sever/save')
+    # file_path = save_image_with_count_and_random_hex(background_with_overlays, 'C:/Users/lim16/Desktop/PhotoBox/sever/save')
+    file_path = save_image_with_count_and_random_hex(background_with_overlays, '/home/jisu/project/PhotoBox/sever/save')
 
     # OpenCV를 통해 이미지를 Bytes 형태로 변환
     _, encoded_image = cv2.imencode('.jpg', resized_background)
