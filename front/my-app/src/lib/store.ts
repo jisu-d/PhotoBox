@@ -8,6 +8,7 @@ export const user_data: Writable<USER_INFO> = writable<USER_INFO>({
     select_imgs_num: [], // 배열의 길이가 4개 capture_imgs배열의 이미지 index
     made_img: '',
     cropp_size: '',
+    cover: null,
 });
 
 

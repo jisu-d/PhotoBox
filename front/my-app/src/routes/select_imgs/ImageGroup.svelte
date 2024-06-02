@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { user_data } from '$lib/store';
-  import { onDestroy, onMount } from 'svelte';
+  import { onMount } from 'svelte';
   
   let value: string[] = [];
   

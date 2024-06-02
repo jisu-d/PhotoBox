@@ -4,6 +4,7 @@ export type FRAME_IMG = {
     src: string;
     style: string;
     cropp_size: string;
+    cover: boolean
 }[][]
 
 
@@ -13,6 +14,7 @@ export type USER_INFO = {
     select_imgs_num: number[];
     made_img: string;
     cropp_size: string;
+    cover: null | boolean
 }
 
 export type MADE_DATE = {

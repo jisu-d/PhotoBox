@@ -34,13 +34,18 @@
     let stream: MediaStream;
     let reqNum = 0;
 
-    let filedata = ($user_data.design_num).split('-');
-
     // 0 : 평소 상태
     // 1 : 찍기 직전
     // 2 : 멈춤
     let status = 0;
     let ctx: CanvasRenderingContext2D;
+
+    const framepath = $user_data.design_num.split('-')[0]
+
+    console.log($user_data);
+    
+
+    let canvasSize = { width: 0, height: 0 }
 
     let camStreame = false
 
@@ -51,6 +56,8 @@
     let cur = 0;
     const TERM = 4000;
     const WAIT = 2000;
+
+    let ranNum = 0
 
     // class display 판단 ture -> none | false -> black
     let capchtimer = true;
@@ -88,7 +95,18 @@
         if (temp) ctx = temp;
     }
 
-    let update = () => {
+    let overlayImage: HTMLImageElement | null = null;
+
+    $ : {
+        if (browser && overlayImage) {
+            update();
+        }
+    }
+
+    const update = () => {
+        if (!videoSource || !canvasElement || !ctx) return;
+
+        // 비디오 데이터의 이미지 그리기
         let value = $user_data.cropp_size;
         let [m, n] = value.split(':').map(Number);
         if (isNaN(m) || isNaN(n) || m < 1 || n < 1) {
@@ -102,6 +120,20 @@
         ctx.setTransform(-1, 0, 0, 1, width, 0);
         ctx.drawImage(videoSource, (videoSource.videoWidth - width) / 2, (videoSource.videoHeight - height) / 2, width, height, 0, 0, width, height);
         ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+        // PNG 투명 이미지 그리기
+        if (overlayImage) {
+            ctx.drawImage(overlayImage, 0, 0, width, height);
+        }
+    };
+
+    // PNG 투명 이미지 로드
+    const loadOverlayImage = (src: string) => {
+        overlayImage = new Image();
+        overlayImage.src = src;
+        overlayImage.onload = () => {
+            update();
+        };
     };
 
     const loop = () => {
@@ -119,6 +151,13 @@
 
         if (status === 1) {
             capchtimer = false;
+            
+            if (capture.length + 1 < 5 && $user_data.cover){
+                loadOverlayImage(`/frame/${framepath}/cover_imgs/${capture.length + 1}.png`);
+                console.log(1);
+            } else if (capture.length + 1 >= 5 && $user_data.cover){
+                loadOverlayImage(`/frame/${framepath}/cover_imgs/${ranNum}.png`);
+            }
             captime = Math.abs(Math.floor((Date.now() - cur) / 1000));
         } else if (status === 2 || captime - 1 <= 0) {
             capchtimer = true;
@@ -129,6 +168,11 @@
                 reqNum = requestAnimationFrame(loop);
                 return;
             }
+
+            if (capture.length + 1 >= 5 && $user_data.cover){
+                ranNum = Math.floor(Math.random() * 4) + 1
+            }
+            
             status = 1;
             cur = Date.now() + TERM;
         }
@@ -136,7 +180,6 @@
         update();
 
         if (status === 1 && Date.now() - cur > 0) {
-
             canvasElement.toBlob(blob => {
                 if (!blob) return;
                 const reader = new FileReader();

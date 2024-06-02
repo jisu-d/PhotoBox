@@ -9,8 +9,8 @@
 	const selectedImage = writable<string | null>(null);
 
 	// 이미지 클릭 핸들러
-	function handleImageClick(croppSize: string, title: string) {
-		user_data.set({ ...$user_data, design_num: title, cropp_size: croppSize });
+	function handleImageClick(croppSize: string, title: string, cover:boolean) {
+		user_data.set({ ...$user_data, design_num: title, cropp_size: croppSize, cover: cover});
 		selectedImage.set(title); // 선택된 이미지를 업데이트
 	}
 
@@ -68,7 +68,7 @@
 					src={ele.src} 
 					style={ele.style}
 					class:selected={$selectedImage === ele.title}
-					on:click={() => handleImageClick(ele.cropp_size, ele.title)}
+					on:click={() => handleImageClick(ele.cropp_size, ele.title, ele.cover)}
 				>
 			{/each}
         </div>

@@ -53,7 +53,7 @@
     <p class="error">{error}</p>
 {:else if data == null}
     <div class="py-32">
-        <div class="px-3 py-1 text-xs font-medium leading-none text-center text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">Create image....</div>
+        <div class="px-3 py-1 text-xs font-medium leading-none text-center text-blue-800 bg-blue-200 rounded-full animate-pulse ">Create image....</div>
     </div>
 {:else if data}
     <img src={'data:image/jpeg;base64,' + data.collage_img} class="dynamic-img shadow-lg "  alt="">
