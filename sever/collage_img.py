@@ -64,7 +64,7 @@ def save_image_with_count_and_random_hex(background, directory):
     num_files = count_files(directory)
     file_path = f'{directory}/{num_files + 1}-{random_hex}.jpg'
     cv2.imwrite(file_path, background)
-    return file_path
+    return f'{num_files + 1}-{random_hex}.jpg'
 
 def resize_image(background, max_width, max_height):
     original_height, original_width = background.shape[:2]
@@ -118,9 +118,9 @@ def creative_collage_images(data):
     # OpenCV를 통해 이미지를 Bytes 형태로 변환
     _, encoded_image = cv2.imencode('.jpg', resized_background)
 
-    # cv2.imshow('Result', resized_background)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.imshow('Result', resized_background)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     # Bytes 데이터를 base64로 인코딩
     base64_encoded_image = base64.b64encode(encoded_image).decode('utf-8')

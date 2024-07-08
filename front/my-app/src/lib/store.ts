@@ -9,6 +9,8 @@ export const user_data: Writable<USER_INFO> = writable<USER_INFO>({
     made_img: '',
     cropp_size: '',
     cover: null,
+    printoutNum: 1,
+    imgPath: '',
 });
 
 

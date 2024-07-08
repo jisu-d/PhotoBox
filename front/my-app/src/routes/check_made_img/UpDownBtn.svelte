@@ -1,5 +1,6 @@
 <script>
     import { writable } from 'svelte/store';
+    import { user_data } from '$lib/store'
 
     const max = 5
     const min = 1
@@ -12,8 +13,9 @@
             decrement: () => update((n) => (n > min ? n - min : n)),
         };
     }
-
-    const count = createCount();
+    
+    const count = createCount();;
+    $: user_data.set({ ...$user_data, printoutNum: $count})
 </script>
 
 <form class="">

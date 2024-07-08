@@ -17,14 +17,15 @@
         try {
             const response = await fetch('http://localhost:8000/createCollage', {
             // const response = await fetch('https://pgxx9fwk-8000.asse.devtunnels.ms/createCollage', {
-
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(madeInfo)
             });
-            data = await response.json();
+            const d = await response.json() as COLLAGE_IMG_DATE
+            user_data.set({ ...$user_data, imgPath: d.img_name})
+            data = d
         } catch (err) {
             error = err
         }

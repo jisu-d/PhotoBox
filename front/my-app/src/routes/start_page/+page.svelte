@@ -13,5 +13,8 @@
         select_imgs_num: [],
         made_img: '',
         cropp_size: '',
+        printoutNum: 1,
+        cover: null,
+        imgPath: ''
     })
 </script>

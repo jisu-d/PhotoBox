@@ -16,7 +16,7 @@
     })
 </script>
 
-<div class="bg-white  border border-gray-200 rounded-lg shadow p-8 flex flex-col ">
+<div class="bg-white border border-gray-200 rounded-lg shadow p-8 flex flex-col ">
     <div class="mb-3 w-full flex justify-evenly">
         <MadeImg />
     </div>

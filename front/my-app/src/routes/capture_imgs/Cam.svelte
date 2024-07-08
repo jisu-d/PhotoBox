@@ -42,9 +42,6 @@
 
     const framepath = $user_data.design_num.split('-')[0]
 
-    console.log($user_data);
-    
-
     let canvasSize = { width: 0, height: 0 }
 
     let camStreame = false
@@ -154,7 +151,6 @@
             
             if (capture.length + 1 < 5 && $user_data.cover){
                 loadOverlayImage(`/frame/${framepath}/cover_imgs/${capture.length + 1}.png`);
-                console.log(1);
             } else if (capture.length + 1 >= 5 && $user_data.cover){
                 loadOverlayImage(`/frame/${framepath}/cover_imgs/${ranNum}.png`);
             }

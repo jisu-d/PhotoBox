@@ -14,7 +14,9 @@ export type USER_INFO = {
     select_imgs_num: number[];
     made_img: string;
     cropp_size: string;
-    cover: null | boolean
+    cover: null | boolean;
+    printoutNum: number;
+    imgPath: string
 }
 
 export type MADE_DATE = {
@@ -25,4 +27,9 @@ export type MADE_DATE = {
 export type COLLAGE_IMG_DATE = {
     img_name: string;
     collage_img: string;
+}
+
+export type PRINTOUT_INFO = {
+    printoutNum: number;
+    path: string;
 }
