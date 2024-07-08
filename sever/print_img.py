@@ -16,10 +16,9 @@
 
 # subprocess.run(['lp', '-d', 'Canon_SELPHY_CP1300', '-o', 'media=Custom.100x148mm', '/home/jisu/project/PhotoBox/sever/processed_image.jpg'])
 
+import subprocess
 def printImgs(printoutNum, path):
-    # for i in range(path):
-    #     pass
-
-    print(printoutNum, path)
+    for _ in range(printoutNum):
+        subprocess.run(['lp', '-d', 'Canon_SELPHY_CP1300_', f'/home/jisu/project/PhotoBox/sever/save/{path}.jpg'], check=True)
 
 

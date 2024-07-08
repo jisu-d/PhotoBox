@@ -64,7 +64,7 @@ def save_image_with_count_and_random_hex(background, directory):
     num_files = count_files(directory)
     file_path = f'{directory}/{num_files + 1}-{random_hex}.jpg'
     cv2.imwrite(file_path, background)
-    return f'{num_files + 1}-{random_hex}.jpg'
+    return f'{num_files + 1}-{random_hex}'
 
 def resize_image(background, max_width, max_height):
     original_height, original_width = background.shape[:2]
