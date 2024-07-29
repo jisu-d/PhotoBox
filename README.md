@@ -90,7 +90,7 @@
       <th style="width: 35%">상품명</th>
       <th style="width: 10%">수량</th>
       <th style="width: 40%">용도</th>
-      <th style="5%">구매경로</th>
+      <th style="width: 5%">구매경로</th>
     </tr>
   </thead>
   <tbody>
