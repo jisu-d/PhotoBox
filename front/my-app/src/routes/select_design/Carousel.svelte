@@ -37,6 +37,8 @@
 		width: 100%;
 		overflow: auto;
 		scroll-snap-type: x mandatory;
+		-ms-overflow-style: none; /* IE 11 */
+    	scrollbar-width: none; /* Firefox 64 */
 		white-space: nowrap;
 	}
 	#container::-webkit-scrollbar {

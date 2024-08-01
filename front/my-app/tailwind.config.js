@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        'tall': {'raw': '(min-height: 1920px)'},
+        'tall': {'raw': '(min-height: 1520px)'},
       },
       colors: {
         // https://coolors.co/palette/a41623-f85e00-ffb563-ffd29d-918450

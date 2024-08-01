@@ -65,7 +65,7 @@
         aria-label="이미지 선택"
         class:selected={$user_data.select_imgs_num.includes(index)}
       >
-        <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-8xl font-bold text-white z-10">
+        <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[6vh] font-bold text-white z-10">
           {#if $user_data.select_imgs_num.includes(index)}
             {$user_data.select_imgs_num.indexOf(index) + 1}
           {/if}
