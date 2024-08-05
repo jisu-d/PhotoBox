@@ -8,8 +8,6 @@
     let dots = '';
     let intervalId: number | undefined;
     let timeoutId: number | undefined;
-
-    console.log(number);
     
     
 
