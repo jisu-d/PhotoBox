@@ -6,12 +6,11 @@
 
 
 import cv2
-import numpy as np
 import subprocess
 
-def add_white_space(image_path, output_path, dpi=300, space_mm=10):
+def crop_image(image_path, output_path, dpi=300, crop_mm=10):
     # Convert mm to pixels
-    space_px = int(dpi * (space_mm / 25.4))
+    crop_px = int(dpi * (crop_mm / 25.4))
 
     # Load the image
     image = cv2.imread(image_path)
@@ -19,24 +18,26 @@ def add_white_space(image_path, output_path, dpi=300, space_mm=10):
     # Get the dimensions of the original image
     height, width, channels = image.shape
 
-    # Create a new image with the extra space
-    new_width = width - space_px
-    new_height = height - space_px
-    new_image = np.ones((new_height, new_width, channels), dtype=np.uint8) * 255  # White background
+    # Calculate the new dimensions
+    new_width = width - crop_px
+    new_height = height - crop_px
 
-    # Place the original image in the top-left corner of the new image
-    new_image[:height, :width] = image
 
-    # Save the new image
-    cv2.imwrite(output_path, new_image)
+    # Crop the image
+    cropped_image = image[:new_height, :new_width]
+
+    # Save the cropped image
+    cv2.imwrite(output_path, cropped_image)
 
 def printImgs(printoutNum, path):
     image_path = f'/home/jisu/project/PhotoBox/sever/save/{path}.jpg'
-    output_path = f'/home/jisu/project/PhotoBox/sever/save/{path}_modified.jpg'
+    output_path = f'/home/jisu/project/PhotoBox/sever/save/{path}_cropped.jpg'
     
-    # Add white space to the image
-    add_white_space(image_path, output_path)
+    # Crop the image
+    crop_image(image_path, output_path)
     
-    # Print the modified image
+    # Print the cropped image
     for _ in range(printoutNum):
         subprocess.run(['lp', '-d', 'Canon_SELPHY_CP1300_', output_path], check=True)
+
+
