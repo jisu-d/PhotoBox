@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 import subprocess
 
-def add_white_space(image_path, output_path, dpi=300, space_mm=1):
+def add_white_space(image_path, output_path, dpi=300, space_mm=10):
     # Convert mm to pixels
     space_px = int(dpi * (space_mm / 25.4))
 
@@ -39,4 +39,4 @@ def printImgs(printoutNum, path):
     
     # Print the modified image
     for _ in range(printoutNum):
-        # subprocess.run(['lp', '-d', 'Canon_SELPHY_CP1300_', output_path], check=True)
+        subprocess.run(['lp', '-d', 'Canon_SELPHY_CP1300_', output_path], check=True)
