@@ -40,6 +40,3 @@ def printImgs(printoutNum, path):
     # Print the modified image
     for _ in range(printoutNum):
         subprocess.run(['lp', '-d', 'Canon_SELPHY_CP1300_', output_path], check=True)
-
-# Example usage
-printImgs(5, 'example_image')
