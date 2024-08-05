@@ -33,7 +33,7 @@
 </script>
 
 <style>
-     @media (max-aspect-ratio: 1/1) {
+     /* @media (max-aspect-ratio: 1/1) {
         .dynamic-img {
             max-width: 55vh;
         }
@@ -42,7 +42,7 @@
         .dynamic-img {
             max-width: 50vh;
         }
-    }
+    } */
 
     .error {
         color: red;
@@ -57,5 +57,5 @@
         <div class="px-3 py-1 text-xs font-medium leading-none text-center text-blue-800 bg-blue-200 rounded-full animate-pulse ">Create image....</div>
     </div>
 {:else if data}
-    <img src={'data:image/jpeg;base64,' + data.collage_img} class="dynamic-img shadow-lg "  alt="">
+    <img src={'data:image/jpeg;base64,' + data.collage_img} class="dynamic-img shadow-lg w-full "  alt="">
 {/if}

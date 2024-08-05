@@ -4,7 +4,7 @@
     import { goto } from '$app/navigation';
 
     let number = $user_data.printoutNum;
-    let message = '프린트중';
+    let message = 'Printing';
     let dots = '';
     let intervalId: number | undefined;
     let timeoutId: number | undefined;

@@ -24,4 +24,4 @@
     }
 </script>
 
-<button type="submit" on:click={onClick} class=" h-full w-3/4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3">Print now</button>
+<button type="submit" on:click={onClick} class=" h-full w-3/4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-[1.5vh] px-5 pb-1">Print now</button>

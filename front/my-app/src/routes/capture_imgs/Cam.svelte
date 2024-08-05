@@ -216,14 +216,18 @@
     {/if}
 </div> -->
 
-<div class=" w-full h-full bg-black">
+<div class=" w-full h-full bg-black flex flex-col items-center ">
     {#if !camStreame}
         <Loading />
     {/if}
     <video bind:this={videoSource} class="hidden"><track kind="captions"></video>
     {#if videoSource}
-        <canvas bind:this={canvasElement} class="w-full absolute top-1/2 -translate-y-1/2"></canvas>
-        <div class="text-[5vw] -translate-y-1/2 translate-x-1/2 font-normal text-white absolute bottom-5 right-1/2">
+        <!-- <canvas bind:this={canvasElement} class="w-full absolute top-1/2 -translate-y-1/2"></canvas>
+        <div class="text-[5vw] -translate-y-1/2 translate-x-1/flex flex-col items-center justify-center2 font-normal text-white absolute bottom-5 right-1/2">
+            {6 - capture.length > 1 ? 6 - capture.length : 'Last'} chance
+        </div> -->
+        <canvas bind:this={canvasElement} class="w-full mt-[calc(25vh)]"></canvas>
+        <div class="text-[5vw] font-normal text-white pt-[2vh]">
             {6 - capture.length > 1 ? 6 - capture.length : 'Last'} chance
         </div>
         <div class="absolute inset-0 flex items-center justify-center">
