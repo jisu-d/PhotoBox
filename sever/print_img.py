@@ -8,7 +8,7 @@
 import cv2
 import subprocess
 
-def crop_image(image_path, output_path, dpi=300, crop_mm=10):
+def crop_image(image_path, output_path, dpi=300, crop_mm=50):
     # Convert mm to pixels
     crop_px = int(dpi * (crop_mm / 25.4))
 
