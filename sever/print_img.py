@@ -15,8 +15,6 @@ def add_white_space(image_path, output_path, dpi=300, space_mm=0.5):
 
     # Load the image
     image = cv2.imread(image_path)
-    if image is None:
-        raise FileNotFoundError(f"No image found at {image_path}")
 
     # Get the dimensions of the original image
     height, width, channels = image.shape
