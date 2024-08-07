@@ -45,7 +45,7 @@
     const WAIT = 2000;
     let ranNum = 0;
     let capchtimer = true;
-    let overlayImage: HTMLImageElement | null = null;
+    let overlayImage: HTMLImageElement = new Image();;
 
     onMount(() => {
         loop();
@@ -96,20 +96,30 @@
         let { width, height } = calculateCroppedSize(videoSource.videoWidth, videoSource.videoHeight, m, n);
         if (width === 0 || height === 0) return;
 
-        canvasElement.width = width;
-        canvasElement.height = height;
-        ctx.setTransform(-1, 0, 0, 1, width, 0);
+        // Only update the canvas size and context transform if they have changed
+        if (canvasElement.width !== width || canvasElement.height !== height) {
+            canvasElement.width = width;
+            canvasElement.height = height;
+            ctx.setTransform(-1, 0, 0, 1, width, 0);
+        }
+
         ctx.drawImage(videoSource, (videoSource.videoWidth - width) / 2, (videoSource.videoHeight - height) / 2, width, height, 0, 0, width, height);
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+        // Only reset the transform if it was changed
+        if (ctx.getTransform().a !== 1) {
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+        }
 
         let imageData = ctx.getImageData(0, 0, width, height);
         adjustImage(imageData);
+
         ctx.putImageData(imageData, 0, 0);
 
         if (overlayImage) {
             ctx.drawImage(overlayImage, 0, 0, width, height);
         }
     };
+
 
     const calculateCroppedSize = (W: number, H: number, m: number, n: number) => {
         let newWidth: number;
@@ -146,9 +156,9 @@
             capchtimer = false;
 
             if (capture.length + 1 < 5 && $user_data.cover){
-                loadOverlayImage(`/frame/${framepath}/cover_imgs/${capture.length + 1}.png`);
+                overlayImage.src = `/frame/${framepath}/cover_imgs/${capture.length + 1}.png`;
             } else if (capture.length + 1 >= 5 && $user_data.cover){
-                loadOverlayImage(`/frame/${framepath}/cover_imgs/${ranNum}.png`);
+                overlayImage.src = `/frame/${framepath}/cover_imgs/${ranNum}.png`
             }
             captime = Math.abs(Math.floor((Date.now() - cur) / 1000));
         } else if (status === 2 || captime - 1 <= 0) {
@@ -189,14 +199,6 @@
 
         reqNum = requestAnimationFrame(loop);
     };
-
-    const loadOverlayImage = (src: string) => {
-        overlayImage = new Image();
-        overlayImage.src = src;
-        overlayImage.onload = () => {
-            update();
-        };
-    };
 </script>
 
 
@@ -226,7 +228,7 @@
         <div class="text-[5vw] -translate-y-1/2 translate-x-1/flex flex-col items-center justify-center2 font-normal text-white absolute bottom-5 right-1/2">
             {6 - capture.length > 1 ? 6 - capture.length : 'Last'} chance
         </div> -->
-        <canvas bind:this={canvasElement} class="w-full mt-[calc(25vh)]"></canvas>
+        <canvas bind:this={canvasElement} class="w-full mt-[20%]"></canvas>
         <div class="text-[5vw] font-normal text-white pt-[2vh]">
             {6 - capture.length > 1 ? 6 - capture.length : 'Last'} chance
         </div>

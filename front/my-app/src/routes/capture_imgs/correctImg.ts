@@ -1,12 +1,12 @@
 // 보정 기본 값
-let exposure = 1.3; // 노출: 이미지 전체의 밝기를 조정.
-let brightness = 1.0; // 휘도: 픽셀의 밝기를 조정
-let highlights = 1.0; // 하이라이트 : 밝은 영역의 조정을 담당
-let contrast = 1.0; // 대비 (contrast): 이미지의 명암 대비를 조정.
-let saturation = 1.0; // 채도 (saturation): 색상의 강도를 조정
-let hue = 0.0; // 색상 (hue): 색의 종류를 회전시키며 조정
+let exposure = 1.4; // 노출: 이미지 전체의 밝기를 조정.
+let brightness = 0.6; // 휘도: 픽셀의 밝기를 조정
+let highlights = 1; // 하이라이트 : 밝은 영역의 조정을 담당
+let contrast = 0.3; // 대비 (contrast): 이미지의 명암 대비를 조정.
+let saturation = 0.7; // 채도 (saturation): 색상의 강도를 조정
+let hue = 0.5; // 색상 (hue): 색의 종류를 회전시키며 조정
 let luminosity = 1.0; // 명도 (luminosity): 이미지의 밝기를 조정
-let warmth = 0.5; // 따뜻함 (warmth): 색온도를 조정
+let warmth = 0; // 따뜻함 (warmth): 색온도를 조정
 
 export const adjustImage = (imageData: ImageData) => {
     let data = imageData.data;
